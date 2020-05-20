@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+  margin: 0px;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.container {
+    top: 50%;
+    position: absolute;
+    transform: translate(33%, -53%);
+}
+
+.inputs {
+    text-align: -webkit-center;
+}
+.bits {
+    text-align: center;
+}

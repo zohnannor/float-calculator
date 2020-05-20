@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Float Calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bits">
+            <table id="bits">
+                <thead>
+                    <td></td>
+                    <td>Sign</td>
+                    <td>Exponent</td>
+                    <td>Mantissa</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Value:</td>
+                        <td><span id="sign_value"></span></td>
+                        <td>2<sup id="exponent"></sup></td>
+                        <td><span id="mantissa"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Encoded as:</td>
+                        <td><span id="sign_enc"></span></td>
+                        <td><span id="exponent_bits"></span></td>
+                        <td><span id="mantissa_bits"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Binary:</td>
+                        <td>
+                            <input type="checkbox" id="sign" class="bit">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                            <input type="checkbox" class="bit exponent">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <br>
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                            <input type="checkbox" class="bit mantissa">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="inputs">
+            <table id="inputs">
+                <tr>
+                    <td>Decimal representation:</td>
+                    <td><input type="text" id="decimal"></td>
+                </tr>
+                <tr>
+                    <td>Value actually stored in float:</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Error due to conversion:</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Binary Representation:</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Hexadecimal Representation:</td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+        </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
