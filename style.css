@@ -17,14 +17,17 @@ table {
     border-collapse: separate;
 }
 
-table#bits > tbody > tr > td {
+
+table#bits > tbody > tr > td,
+table#bits > thead > tr > td {
     border: 0px solid black;
     padding: 10px;
 }
 
 #inputs {
+    border-spacing: 0px;
+    border-collapse: separate;
     table-layout: fixed;
-    width: 500px;
 }
 
 table#inputs > tbody > tr > td {
@@ -42,7 +45,7 @@ input[type=text] {
 .container {
     top: 50%;
     position: absolute;
-    transform: translate(10%, -53%);
+    transform: translate(10%, -50%);
 }
 
 .inputs {

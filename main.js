@@ -9,6 +9,14 @@ function getById(className) {
 
 //±знак · (1+мантисса/ 2^52) × 2^(порядок − 1023)
 
+function binRepr(binStr) {
+    getById('binary').value = binStr;
+}
+
+function hexRepr(binStr) {
+    getById('hex').value = '0x'+(parseInt(binStr, 2)).toString(16).padStart(16, "0");;
+}
+
 
 function recalculate() {
     let sign = getById('sign').checked ? -1 : 1;
@@ -37,6 +45,10 @@ function recalculate() {
     let enc_mantissa = parseInt(mantissa_bits.join(''), 2);
     getById('mantissa_bits').innerHTML = enc_mantissa;
     getById('mantissa').innerHTML = parseFloat(mantissa);
+
+    let binStr = (sign<0 ? '1' : '0')+exponent_bits.join('')+mantissa_bits.join('');
+    binRepr(binStr);
+    hexRepr(binStr);
 
     if (enc_exponent == 0) {
         getById('mantissa').innerHTML += ' (denormalized)';
