@@ -130,13 +130,13 @@ document.querySelectorAll('.mod').forEach((elem) => {
 recalculate();
 
 function floatToBin(number) {
-    var f = new Float64Array(1);
+    let f = new Float64Array(1);
     f[0] = number;
-    var view = new Uint8Array(f.buffer);
-    var i,
+    let view = new Uint8Array(f.buffer);
+    let i,
         result = '';
     for (i = view.length - 1; i >= 0; i--) {
-        var bits = view[i].toString(2);
+        let bits = view[i].toString(2);
         if (bits.length < 8) {
             bits = new Array(8 - bits.length).fill('0').join('') + bits;
         }
