@@ -17,24 +17,26 @@ table {
     border-collapse: separate;
 }
 
-
 table#bits > tbody > tr > td,
 table#bits > thead > tr > td {
     border: 0px solid black;
     padding: 10px;
 }
 
+table#bits > tbody > tr :nth-child(1) {
+    text-align: initial;
+}
+
 #inputs {
-    border-spacing: 0px;
-    border-collapse: separate;
-    table-layout: fixed;
+    display: grid;
+    grid-template-columns: 400px 800px;
 }
 
 table#inputs > tbody > tr > td {
     width: 500px;
 }
 
-input[type=text] {
+input[type='text'] {
     width: -webkit-fill-available;
     height: 22px;
     border: 0px;
@@ -49,7 +51,8 @@ input[type=text] {
 }
 
 .inputs {
-    text-align: -webkit-center;
+    display: flex;
+    justify-content: center;
 }
 
 .bits {
