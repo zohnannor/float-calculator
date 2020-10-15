@@ -1,0 +1,70 @@
+.table {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: center;
+    text-align: start;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cell {
+    padding: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    justify-content: center;
+}
+
+sup {
+    font-weight: bold;
+}
+
+.wrap-2-col {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column;
+}
+
+.red {
+    background-color: rgb(255, 212, 211);
+}
+
+.green {
+    background-color: rgb(237, 255, 199);
+}
+
+.blue {
+    background-color: rgb(207, 202, 223);
+}
+
+/* bits */
+
+input[type='checkbox'] {
+    display: none;
+}
+
+label {
+    width: 20px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: black;
+    transition: 0.2s all;
+    cursor: pointer;
+}
+
+input:checked + span::after {
+    content: '1';
+}
+
+input + span::after {
+    content: '0';
+}
+/* /bits */
