@@ -1,4 +1,4 @@
-# [zohnannor.github.io/float-calculator](zohnannor.github.io/float-calculator)
+# [zohnannor.github.io/float-calculator](https://zohnannor.github.io/float-calculator)
 
 With this tool you can convert between decimal representation of numbers and the binary [IEEE 754 standard for floating point numbers](https://en.wikipedia.org/wiki/IEEE_754)
 
