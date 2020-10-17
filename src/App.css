@@ -1,9 +1,12 @@
 .table {
     display: grid;
-    grid-template-columns: repeat(4, max-content);
+    /* grid-template-columns: repeat(4, max-content); */
     justify-content: center;
     text-align: start;
+}
 
+.container {
+    width: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,15 +34,24 @@ sup {
 }
 
 .red {
-    background-color: rgb(255, 212, 211);
+    background-color: #2e2e2e;
 }
 
 .green {
-    background-color: rgb(237, 255, 199);
+    background-color: #383838;
 }
 
 .blue {
-    background-color: rgb(207, 202, 223);
+    background-color: #424242;
+}
+
+.wide {
+    width: 500px;
+}
+
+.label,
+.wide {
+    padding: 2px;
 }
 
 /* bits */
@@ -54,8 +66,8 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    background: black;
+    color: #f7f7f7;
+    background: #222222;
     transition: 0.2s all;
     cursor: pointer;
 }

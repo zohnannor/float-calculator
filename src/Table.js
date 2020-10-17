@@ -1,8 +1,9 @@
 import React from 'react';
 
-const multiplyArray = (arr, length) => Array.from({ length }, () => arr).flat();
+export const multiplyArray = (arr, length) =>
+    Array.from({ length }, () => arr).flat();
 
-class Bit extends React.Component {
+export class Bit extends React.Component {
     render() {
         return (
             <label className='checkbox' onClick={this.flipBit}>
@@ -15,18 +16,18 @@ class Bit extends React.Component {
     flipBit(bit) {
         if (bit.target.tagName === 'INPUT') {
             bit.target.parentNode.style.color = bit.target.checked
-                ? 'black'
-                : 'white';
+                ? '#222222'
+                : '#EEEEEE';
             bit.target.parentNode.style.background = bit.target.checked
-                ? 'white'
-                : 'black';
+                ? '#EEEEEE'
+                : '#222222';
         }
     }
 }
 
 class Cell extends React.Component {
     render() {
-        const cls = 'cell' + this.props.cls;
+        const cls = `cell ${this.props.cls}`;
         return <div className={cls}>{this.props.children}</div>;
     }
 }
@@ -34,12 +35,7 @@ class Cell extends React.Component {
 class Row extends React.Component {
     render() {
         return this.props.cols.map((inner, i) => {
-            const classes =
-                (i !== 0 ? ' center' : '') +
-                (i % 4 === 1 ? ' blue' : '') +
-                ((i - 1) % 4 === 1 ? ' green' : '') +
-                ((i - 2) % 4 === 1 ? ' red' : '');
-
+            const classes = this.props.colsClasses[i % 4];
             return (
                 <Cell key={i} cls={classes}>
                     {inner}
@@ -50,35 +46,21 @@ class Row extends React.Component {
 }
 
 export class Table extends React.Component {
-    constructor() {
-        super();
-        this.tableData = [
-            ['', 'Sign', 'Exponent', 'Mantissa'],
-            [
-                'Value:',
-                '+1',
-                <span>
-                    2<sup id='exponent'>-1023 (denormalized)</sup>
-                </span>,
-                '1 (denormalized)',
-            ],
-            ['Encoded as:', '0', '0', '0'],
-            [
-                'Binary:',
-                <Bit></Bit>,
-                multiplyArray([<Bit></Bit>], 11),
-                <div className='wrap-2-col'>
-                    {multiplyArray([<Bit></Bit>], 52)}
-                </div>,
-            ],
-        ];
-    }
-
     render() {
+        const col_width =
+            this.props.colWidth ||
+            `repeat(${this.props.table[0].length}, max-content)`;
+
         return (
-            <div className='table'>
-                {this.tableData.map((cols, i) => {
-                    return <Row key={i} cols={cols}></Row>;
+            <div className='table' style={{ gridTemplateColumns: col_width }}>
+                {this.props.table.map((cols, i) => {
+                    return (
+                        <Row
+                            key={i}
+                            cols={cols}
+                            colsClasses={this.props.colsClasses}
+                        ></Row>
+                    );
                 })}
             </div>
         );

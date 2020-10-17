@@ -1,11 +1,47 @@
 html,
 body {
-    /* height: 100%; */
     margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
     font-family: 'JetBrains Mono', monospace;
-    background-color: rgb(210, 234, 255);
-    font-size: 14pt;
+    background-color: #181818;
+    color: #f7f7f7;
+    font-size: 13pt;
 }
+
+input[type='text'] {
+    width: 64ch;
+    height: 22px;
+    border: 0px;
+    font-size: 13pt;
+    font-family: monospace;
+    background-color: #323232;
+    color: #f7f7f7;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+}
+
+.modifiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: -webkit-fill-available;
+}
+
+.modifiers input {
+    margin: 2px;
+    font-size: 16pt;
+    border: none;
+    background-color: #323232;
+    color: #f7f7f7;
+}
+
 /* 
 sup {
     font-size: 14pt;
@@ -36,13 +72,7 @@ table#inputs > tbody > tr > td {
     width: 500px;
 }
 
-input[type='text'] {
-    width: -webkit-fill-available;
-    height: 22px;
-    border: 0px;
-    font-size: 16pt;
-    font-family: monospace;
-}
+
 
 .container {
     top: 50%;
@@ -59,18 +89,7 @@ input[type='text'] {
     text-align: center;
 }
 
-.modifiers {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: -webkit-fill-available;
-}
 
-.modifiers input {
-    margin: 2px;
-    font-size: 16pt;
-    border: none;
-    background-color: white;
-}
 
 .bit {
     margin: 3px;
