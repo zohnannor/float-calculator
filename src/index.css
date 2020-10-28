@@ -13,7 +13,7 @@ body {
     font-size: 13pt;
 }
 
-input[type='text'] {
+input.input {
     width: 64ch;
     height: 22px;
     border: 0px;
