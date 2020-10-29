@@ -1,0 +1,62 @@
+.container {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center {
+    justify-content: center;
+}
+
+sup {
+    font-weight: bold;
+}
+
+.wrap-2-col {
+    display: grid;
+    grid-template-columns: repeat(26, 1fr);
+    grid-auto-flow: row;
+}
+
+.sign {
+    background-color: #424242;
+}
+
+.exponent {
+    background-color: #383838;
+}
+
+.mantissa {
+    background-color: #2e2e2e;
+}
+
+input.input {
+    width: 64ch;
+    height: 22px;
+    border: 0px;
+    font-size: 13pt;
+    background-color: #323232;
+    color: #f7f7f7;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+}
+
+.modifiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+
+.modifiers input {
+    margin: 2px;
+    font-size: 16pt;
+    border: none;
+    background-color: #323232;
+    color: #f7f7f7;
+}
