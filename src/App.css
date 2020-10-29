@@ -1,22 +1,9 @@
-.table {
-    display: grid;
-    /* grid-template-columns: repeat(4, max-content); */
-    justify-content: center;
-    text-align: start;
-}
-
 .container {
     width: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.cell {
-    padding: 7px;
-    display: flex;
-    align-items: center;
 }
 
 .center {
@@ -29,54 +16,47 @@ sup {
 
 .wrap-2-col {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(26, 1fr);
+    grid-auto-flow: row;
 }
 
-.red {
-    background-color: #2e2e2e;
-}
-
-.green {
-    background-color: #383838;
-}
-
-.blue {
+.sign {
     background-color: #424242;
 }
 
-.wide {
-    width: 500px;
+.exponent {
+    background-color: #383838;
 }
 
-.label,
-.wide {
-    padding: 2px;
+.mantissa {
+    background-color: #2e2e2e;
 }
 
-/* bits */
-
-input[type='checkbox'] {
-    display: none;
-}
-
-label {
-    width: 22px;
+input.input {
+    width: 64ch;
     height: 22px;
+    border: 0px;
+    font-size: 13pt;
+    background-color: #323232;
+    color: #f7f7f7;
+}
+
+.inputs {
     display: flex;
     justify-content: center;
-    align-items: center;
+}
+
+.modifiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+
+.modifiers input {
+    margin: 2px;
+    font-size: 16pt;
+    border: none;
+    background-color: #323232;
     color: #f7f7f7;
-    background: #222222;
-    transition: 0.2s all;
-    cursor: pointer;
 }
-
-input:checked + span::after {
-    content: '1';
-}
-
-input + span::after {
-    content: '0';
-}
-/* /bits */

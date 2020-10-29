@@ -1,0 +1,9 @@
+.cell {
+    padding: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    padding: 2px;
+}

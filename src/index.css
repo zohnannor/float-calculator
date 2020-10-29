@@ -7,95 +7,11 @@ body {
     vertical-align: baseline;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    font-family: 'JetBrains Mono', monospace;
     background-color: #181818;
     color: #f7f7f7;
     font-size: 13pt;
 }
 
-input.input {
-    width: 64ch;
-    height: 22px;
-    border: 0px;
-    font-size: 13pt;
-    font-family: monospace;
-    background-color: #323232;
-    color: #f7f7f7;
+* {
+    font-family: 'JetBrains Mono', monospace;
 }
-
-.inputs {
-    display: flex;
-    justify-content: center;
-}
-
-.modifiers {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: -webkit-fill-available;
-}
-
-.modifiers input {
-    margin: 2px;
-    font-size: 16pt;
-    border: none;
-    background-color: #323232;
-    color: #f7f7f7;
-}
-
-/* 
-sup {
-    font-size: 14pt;
-    font-weight: bold;
-}
-
-table {
-    border-spacing: 0px;
-    border-collapse: separate;
-}
-
-table#bits > tbody > tr > td,
-table#bits > thead > tr > td {
-    border: 0px solid black;
-    padding: 10px;
-}
-
-table#bits > tbody > tr :nth-child(1) {
-    text-align: initial;
-}
-
-#inputs {
-    display: grid;
-    grid-template-columns: 400px 800px;
-}
-
-table#inputs > tbody > tr > td {
-    width: 500px;
-}
-
-
-
-.container {
-    top: 50%;
-    position: absolute;
-    transform: translate(10%, -50%);
-}
-
-.inputs {
-    display: flex;
-    justify-content: center;
-}
-
-.bits {
-    text-align: center;
-}
-
-
-
-.bit {
-    margin: 3px;
-    padding: 1px;
-    transform: scale(1.3);
-}
-
-
- */

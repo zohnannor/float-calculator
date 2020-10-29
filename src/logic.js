@@ -1,5 +1,9 @@
 /* global BigInt */
 
+function addZeroes(num) {
+    return Number.isInteger(num) ? num.toFixed(1) : num;
+}
+
 function numTo64BitBinary(n) {
     return n.toString(2).padStart(64, '0');
 }
@@ -20,10 +24,7 @@ function binToFloat(binary) {
         return NaN;
     }
 
-    const float =
-        sign *
-        (first_mantissa_bit + mantissa / 2 ** 52) *
-        2 ** ((exponent || 1) - 1023);
+    const float = sign * (first_mantissa_bit + mantissa / 2 ** 52) * 2 ** ((exponent || 1) - 1023);
 
     return float;
 }
@@ -66,4 +67,4 @@ function floatToNum(number) {
     return BigInt('0b' + result);
 }
 
-module.exports = { numTo64BitBinary, binToFloat, floatToNum };
+module.exports = { addZeroes, numTo64BitBinary, binToFloat, floatToNum };
