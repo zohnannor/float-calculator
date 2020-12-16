@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Cell from '../Cell/Cell';
-import PropTypes from 'prop-types';
 
 function Row({ cols, colsClasses }) {
     return cols.map((inner, i) => {

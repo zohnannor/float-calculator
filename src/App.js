@@ -1,10 +1,9 @@
 /* global BigInt */
 import React, { useState } from 'react';
 import './App.css';
+import { Bit, flipBit } from './components/Bit/Bit';
 import Table from './components/Table/Table';
-import { Bit } from './components/Bit/Bit';
-import { binToFloat, floatToNum, numTo64BitBinary, addZeroes } from './logic';
-import { flipBit } from './components/Bit/Bit';
+import { addZeroes, binToFloat, floatToNum, numTo64BitBinary } from './logic';
 
 export default function App() {
     const [decimal, setDecimal] = useState('0.0');
@@ -25,7 +24,7 @@ export default function App() {
         const bits =
             inputs ||
             Array.from(document.getElementsByClassName('bit'))
-                .map((el) => (el.checked ? 1 : 0))
+                .map(el => (el.checked ? 1 : 0))
                 .join('');
 
         const sign_bit = bits.slice(0, 1);
@@ -94,13 +93,13 @@ export default function App() {
             <input
                 className='input'
                 value={decimal}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                     if (e.key === 'Enter') {
                         const float = parseFloat(e.target.value) || 0.0;
                         updateInputs(numTo64BitBinary(floatToNum(float)));
                     }
                 }}
-                onChange={(e) => {
+                onChange={e => {
                     setDecimal(e.target.value);
                 }}
             />,
@@ -115,12 +114,12 @@ export default function App() {
             <input
                 className='input'
                 value={binary}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                     if (e.key === 'Enter') {
                         updateInputs(e.target.value.padStart(64, '0'));
                     }
                 }}
-                onChange={(e) => {
+                onChange={e => {
                     setBinary(e.target.value);
                 }}
             />,
@@ -130,13 +129,13 @@ export default function App() {
             <input
                 className='input'
                 value={hex}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                     if (e.key === 'Enter') {
                         const number = BigInt(e.target.value) || 0;
                         updateInputs(numTo64BitBinary(number));
                     }
                 }}
-                onChange={(e) => {
+                onChange={e => {
                     setHex(e.target.value);
                 }}
             />,
@@ -158,7 +157,7 @@ export default function App() {
                     <input
                         type='button'
                         value='+1'
-                        onClick={(e) => {
+                        onClick={e => {
                             const current_number = BigInt(hex);
                             const new_number = (current_number + 1n) & 0xffffffffffffffffn;
                             updateInputs(numTo64BitBinary(new_number));
@@ -167,7 +166,7 @@ export default function App() {
                     <input
                         type='button'
                         value='-1'
-                        onClick={(e) => {
+                        onClick={e => {
                             const current_number = BigInt(hex);
                             const new_number =
                                 current_number === 0n ? 0xffffffffffffffffn : current_number - 1n;
@@ -177,7 +176,7 @@ export default function App() {
                     <input
                         type='button'
                         value='<<'
-                        onClick={(e) => {
+                        onClick={e => {
                             const current_number = BigInt(hex);
                             const new_number = (current_number << 1n) & 0xffffffffffffffffn;
                             updateInputs(numTo64BitBinary(new_number));
@@ -186,7 +185,7 @@ export default function App() {
                     <input
                         type='button'
                         value='>>'
-                        onClick={(e) => {
+                        onClick={e => {
                             const current_number = BigInt(hex);
                             const new_number = current_number >> 1n;
                             updateInputs(numTo64BitBinary(new_number));

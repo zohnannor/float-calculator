@@ -52,9 +52,9 @@ sign=${sign << 63n}\texponent=${(BigInt(exponent) + 1023n) << 52n}\tmantissa=${
 } */
 
 function floatToNum(number) {
-    let f = new Float64Array(1);
+    const f = new Float64Array(1);
     f[0] = number;
-    let view = new Uint8Array(f.buffer);
+    const view = new Uint8Array(f.buffer);
     let i,
         result = '';
     for (i = view.length - 1; i >= 0; i--) {

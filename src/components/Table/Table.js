@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Row from '../Row/Row';
 import './Table.css';
-import PropTypes from 'prop-types';
 
 function Table({ table, colWidth, colsClasses }) {
     const col_width = colWidth || `repeat(${table[0].length}, max-content)`;
