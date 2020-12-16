@@ -12,6 +12,6 @@ body {
     font-size: 13pt;
 }
 
-* {
+html {
     font-family: 'JetBrains Mono', monospace;
 }
