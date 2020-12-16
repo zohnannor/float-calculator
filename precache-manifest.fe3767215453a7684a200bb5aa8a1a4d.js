@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b2d71e93c4559dca3dee691dd201f160",
+    "revision": "d90217a016963498521b79fa690ea05b",
     "url": "/float-calculator/index.html"
   },
   {
-    "revision": "f0bcc3a10e6fddec04aa",
-    "url": "/float-calculator/static/css/main.5651e3f3.chunk.css"
+    "revision": "e71ba43fe5f8177a5821",
+    "url": "/float-calculator/static/css/main.735c6aba.chunk.css"
   },
   {
     "revision": "bfba02601a95099d74e6",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/float-calculator/static/js/2.00543f18.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f0bcc3a10e6fddec04aa",
-    "url": "/float-calculator/static/js/main.0c06ed2b.chunk.js"
+    "revision": "e71ba43fe5f8177a5821",
+    "url": "/float-calculator/static/js/main.41ec20c7.chunk.js"
   },
   {
     "revision": "a7db8a480275960148dc",

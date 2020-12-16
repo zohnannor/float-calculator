@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/float-calculator/static/css/main.5651e3f3.chunk.css",
-    "main.js": "/float-calculator/static/js/main.0c06ed2b.chunk.js",
-    "main.js.map": "/float-calculator/static/js/main.0c06ed2b.chunk.js.map",
+    "main.css": "/float-calculator/static/css/main.735c6aba.chunk.css",
+    "main.js": "/float-calculator/static/js/main.41ec20c7.chunk.js",
+    "main.js.map": "/float-calculator/static/js/main.41ec20c7.chunk.js.map",
     "runtime-main.js": "/float-calculator/static/js/runtime-main.022c2a2e.js",
     "runtime-main.js.map": "/float-calculator/static/js/runtime-main.022c2a2e.js.map",
     "static/js/2.00543f18.chunk.js": "/float-calculator/static/js/2.00543f18.chunk.js",
     "static/js/2.00543f18.chunk.js.map": "/float-calculator/static/js/2.00543f18.chunk.js.map",
     "index.html": "/float-calculator/index.html",
-    "precache-manifest.5b8298b8c8ab473d2f0650a3e5357625.js": "/float-calculator/precache-manifest.5b8298b8c8ab473d2f0650a3e5357625.js",
+    "precache-manifest.fe3767215453a7684a200bb5aa8a1a4d.js": "/float-calculator/precache-manifest.fe3767215453a7684a200bb5aa8a1a4d.js",
     "service-worker.js": "/float-calculator/service-worker.js",
-    "static/css/main.5651e3f3.chunk.css.map": "/float-calculator/static/css/main.5651e3f3.chunk.css.map",
+    "static/css/main.735c6aba.chunk.css.map": "/float-calculator/static/css/main.735c6aba.chunk.css.map",
     "static/js/2.00543f18.chunk.js.LICENSE.txt": "/float-calculator/static/js/2.00543f18.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.022c2a2e.js",
     "static/js/2.00543f18.chunk.js",
-    "static/css/main.5651e3f3.chunk.css",
-    "static/js/main.0c06ed2b.chunk.js"
+    "static/css/main.735c6aba.chunk.css",
+    "static/js/main.41ec20c7.chunk.js"
   ]
 }
