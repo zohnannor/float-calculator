@@ -120,24 +120,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"logic.ts":[function(require,module,exports) {
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ldexp = exports.frexp = exports.floatToNum = exports.asIntegerRatio = exports.binToFloat = exports.numTo64BitBinary = exports.addZeroes = void 0;
 
-var addZeroes = function addZeroes(num) {
+const addZeroes = num => {
   if (num === 0 && 1 / num == -Infinity) {
     return '-0.0';
   }
@@ -147,46 +135,42 @@ var addZeroes = function addZeroes(num) {
 
 exports.addZeroes = addZeroes;
 
-var numTo64BitBinary = function numTo64BitBinary(n) {
+const numTo64BitBinary = n => {
   return n.toString(2).padStart(64, '0');
 };
 
 exports.numTo64BitBinary = numTo64BitBinary;
 
-var binToFloat = function binToFloat(binary) {
-  var sign_bit = binary.slice(0, 1);
-  var exponent_bits = binary.slice(1, 12);
-  var mantissa_bits = binary.slice(12, 64);
-  var sign = sign_bit === '0' ? 1 : -1;
-  var exponent = parseInt(exponent_bits, 2);
-  var mantissa = parseInt(mantissa_bits, 2);
-  var first_mantissa_bit = exponent === 0 ? 0 : 1;
+const binToFloat = binary => {
+  const sign_bit = binary.slice(0, 1);
+  const exponent_bits = binary.slice(1, 12);
+  const mantissa_bits = binary.slice(12, 64);
+  const sign = sign_bit === '0' ? 1 : -1;
+  const exponent = parseInt(exponent_bits, 2);
+  const mantissa = parseInt(mantissa_bits, 2);
+  const first_mantissa_bit = exponent === 0 ? 0 : 1;
 
-  if (exponent === 2047 && mantissa !== 0) {
+  if (exponent === 0b11111111111 && mantissa !== 0) {
     return NaN;
   }
 
-  return sign * (first_mantissa_bit + mantissa / Math.pow(2, 52)) * Math.pow(2, (exponent || 1) - 1023);
+  return sign * (first_mantissa_bit + mantissa / 2 ** 52) * 2 ** ((exponent || 1) - 1023);
 };
 
 exports.binToFloat = binToFloat;
 
-var asIntegerRatio = function asIntegerRatio(f) {
+const asIntegerRatio = f => {
   f = Math.abs(f);
+  let [float_part, exponent] = (0, exports.frexp)(f);
 
-  var _ref = (0, exports.frexp)(f),
-      _ref2 = _slicedToArray(_ref, 2),
-      float_part = _ref2[0],
-      exponent = _ref2[1];
-
-  for (var i = 0; i < 300 && float_part != Math.floor(float_part); i++) {
+  for (let i = 0; i < 300 && float_part != Math.floor(float_part); i++) {
     float_part *= 2.0;
     exponent--;
   }
 
-  var numerator = BigInt(Math.floor(float_part));
-  var denumerator = 1n;
-  var abs_exponent = BigInt(Math.abs(exponent));
+  let numerator = BigInt(Math.floor(float_part));
+  let denumerator = 1n;
+  let abs_exponent = BigInt(Math.abs(exponent));
 
   if (exponent > 0) {
     numerator <<= abs_exponent;
@@ -199,15 +183,15 @@ var asIntegerRatio = function asIntegerRatio(f) {
 
 exports.asIntegerRatio = asIntegerRatio;
 
-var floatToNum = function floatToNum(number) {
-  var f = new Float64Array(1);
+const floatToNum = number => {
+  const f = new Float64Array(1);
   f[0] = number;
-  var view = new Uint8Array(f.buffer);
-  var i,
+  const view = new Uint8Array(f.buffer);
+  let i,
       result = '';
 
   for (i = view.length - 1; i >= 0; i--) {
-    var bits = view[i].toString(2);
+    let bits = view[i].toString(2);
 
     if (bits.length < 8) {
       bits = new Array(8 - bits.length).fill('0').join('') + bits;
@@ -221,7 +205,7 @@ var floatToNum = function floatToNum(number) {
 
 exports.floatToNum = floatToNum;
 
-var frexp = function frexp(value) {
+const frexp = value => {
   if (value === 0) return [value, 0];
   var data = new DataView(new ArrayBuffer(8));
   data.setFloat64(0, value);
@@ -239,13 +223,11 @@ var frexp = function frexp(value) {
 
 exports.frexp = frexp;
 
-var ldexp = function ldexp(mantissa, exponent) {
+const ldexp = (mantissa, exponent) => {
   var steps = Math.min(3, Math.ceil(Math.abs(exponent) / 1023));
   var result = mantissa;
 
-  for (var i = 0; i < steps; i++) {
-    result *= Math.pow(2, Math.floor((exponent + i) / steps));
-  }
+  for (var i = 0; i < steps; i++) result *= Math.pow(2, Math.floor((exponent + i) / steps));
 
   return result;
 };
@@ -258,22 +240,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.unregister = exports.register = void 0;
-var isLocalhost = Boolean(window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)){3}$/));
+const isLocalhost = Boolean(window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)){3}$/));
 
 function register() {
   if ("development" === 'production' && 'serviceWorker' in navigator) {
-    var publicUrl = new URL(undefined, window.location.toString());
+    const publicUrl = new URL(undefined, window.location.toString());
 
     if (publicUrl.origin !== window.location.origin) {
       return;
     }
 
-    window.addEventListener('load', function () {
-      var swUrl = "".concat(undefined, "/service-worker.js");
+    window.addEventListener('load', () => {
+      const swUrl = `${undefined}/service-worker.js`;
 
       if (isLocalhost) {
         checkValidServiceWorker(swUrl);
-        navigator.serviceWorker.ready.then(function () {
+        navigator.serviceWorker.ready.then(() => {
           console.log('This web app is being served cache-first by a service ' + 'worker. To learn more, visit https://goo.gl/SC7cgQ');
         });
       } else {
@@ -286,12 +268,12 @@ function register() {
 exports.register = register;
 
 function registerValidSW(swUrl) {
-  navigator.serviceWorker.register(swUrl).then(function (registration) {
-    registration.onupdatefound = function () {
-      var installingWorker = registration.installing;
+  navigator.serviceWorker.register(swUrl).then(registration => {
+    registration.onupdatefound = () => {
+      const installingWorker = registration.installing;
 
       if (installingWorker) {
-        installingWorker.onstatechange = function () {
+        installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               console.log('New content is available; please refresh.');
@@ -302,30 +284,30 @@ function registerValidSW(swUrl) {
         };
       }
     };
-  }).catch(function (error) {
+  }).catch(error => {
     console.error('Error during service worker registration:', error);
   });
 }
 
 function checkValidServiceWorker(swUrl) {
-  fetch(swUrl).then(function (response) {
+  fetch(swUrl).then(response => {
     if (response.status === 404 || response.headers.get('content-type').indexOf('javascript') === -1) {
-      navigator.serviceWorker.ready.then(function (registration) {
-        registration.unregister().then(function () {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.unregister().then(() => {
           window.location.reload();
         });
       });
     } else {
       registerValidSW(swUrl);
     }
-  }).catch(function () {
+  }).catch(() => {
     console.log('No internet connection found. App is running in offline mode.');
   });
 }
 
 function unregister() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(function (registration) {
+    navigator.serviceWorker.ready.then(registration => {
       registration.unregister();
     });
   }
@@ -335,25 +317,11 @@ exports.unregister = unregister;
 },{}],"index.ts":[function(require,module,exports) {
 "use strict";
 
-var _document$querySelect, _document$querySelect2, _document$querySelect3, _document$querySelect4;
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
     enumerable: true,
-    get: function get() {
+    get: function () {
       return m[k];
     }
   });
@@ -374,9 +342,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 
   __setModuleDefault(result, mod);
 
@@ -387,35 +353,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var logic_1 = require("./logic");
+const logic_1 = require("./logic");
 
-var serviceWorker = __importStar(require("./serviceWorker"));
+const serviceWorker = __importStar(require("./serviceWorker"));
 
 serviceWorker.register();
-var $bits = document.querySelectorAll('input.bit');
-var $decimal = document.querySelector('#decimal');
-var $actual = document.querySelector('#actual');
-var $binary = document.querySelector('#binary');
-var $hex = document.querySelector('#hex');
-var $sign = document.querySelector('#sign');
-var $exponent = document.querySelector('#exponent');
-var $mantissa = document.querySelector('#mantissa');
-var $enc_sign = document.querySelector('#enc_sign');
-var $enc_exponent = document.querySelector('#enc_exponent');
-var $enc_mantissa = document.querySelector('#enc_mantissa');
-var decimal = '0.0';
-var actual = '0.0';
-var binary = '0'.repeat(64);
-var hex = '0x0';
-var sign = '+1';
-var exponent = '-1023 (denormalized)';
-var mantissa = '1.0 (denormalized)';
-var enc_sign = '0';
-var enc_exponent = '0';
-var enc_mantissa = '0';
+const $bits = document.querySelectorAll('input.bit');
+const $decimal = document.querySelector('#decimal');
+const $actual = document.querySelector('#actual');
+const $binary = document.querySelector('#binary');
+const $hex = document.querySelector('#hex');
+const $sign = document.querySelector('#sign');
+const $exponent = document.querySelector('#exponent');
+const $mantissa = document.querySelector('#mantissa');
+const $enc_sign = document.querySelector('#enc_sign');
+const $enc_exponent = document.querySelector('#enc_exponent');
+const $enc_mantissa = document.querySelector('#enc_mantissa');
+let decimal = '0.0';
+let actual = '0.0';
+let binary = '0'.repeat(64);
+let hex = '0x0';
+let sign = '+1';
+let exponent = '-1023 (denormalized)';
+let mantissa = '1.0 (denormalized)';
+let enc_sign = '0';
+let enc_exponent = '0';
+let enc_mantissa = '0';
 
-var flipBit = function flipBit(bit) {
-  var target = bit;
+const flipBit = bit => {
+  const target = bit;
 
   if (target.tagName === 'INPUT' && target.parentNode) {
     target.parentNode.style.color = target.checked ? '#000000' : '#EEEEEE';
@@ -423,21 +389,17 @@ var flipBit = function flipBit(bit) {
   }
 };
 
-var actualFrom = function actualFrom(f) {
+const actualFrom = f => {
   if (!Number.isFinite(f) || Number.isNaN(f)) {
     return f.toString();
   }
 
-  var _ref = (0, logic_1.asIntegerRatio)(f),
-      _ref2 = _slicedToArray(_ref, 2),
-      n = _ref2[0],
-      d = _ref2[1];
-
-  var exp = d.toString(2).length - 1;
-  var int = eval('(n * 5n ** BigInt(exp)).toString()');
+  let [n, d] = (0, logic_1.asIntegerRatio)(f);
+  let exp = d.toString(2).length - 1;
+  const int = (n * 5n ** BigInt(exp)).toString();
   exp = -exp;
-  var leftdigits = exp + int.length;
-  var dotplace;
+  const leftdigits = exp + int.length;
+  let dotplace;
 
   if (exp <= 0 && leftdigits > -6) {
     dotplace = leftdigits;
@@ -445,8 +407,8 @@ var actualFrom = function actualFrom(f) {
     dotplace = 1;
   }
 
-  var intpart;
-  var fracpart;
+  let intpart;
+  let fracpart;
 
   if (dotplace <= 0) {
     intpart = '0';
@@ -459,32 +421,30 @@ var actualFrom = function actualFrom(f) {
     fracpart = '.' + int.slice(dotplace);
   }
 
-  var s_exp = leftdigits == dotplace ? '' : 'e' + (leftdigits - dotplace);
+  const s_exp = leftdigits == dotplace ? '' : 'e' + (leftdigits - dotplace);
   return (Math.sign(f) < 0 ? '-' : '') + intpart + fracpart + s_exp;
 };
 
-var updateInputs = function updateInputs(inputs) {
-  var bits = inputs || Array.from($bits).map(function (el) {
-    return el.checked ? 1 : 0;
-  }).join('');
-  var sign_bit = bits.slice(0, 1);
-  var exponent_bits = bits.slice(1, 12);
-  var mantissa_bits = bits.slice(12, 64);
-  var exp = parseInt(exponent_bits, 2);
-  var m = parseInt(mantissa_bits, 2);
+const updateInputs = inputs => {
+  const bits = inputs || Array.from($bits).map(el => el.checked ? 1 : 0).join('');
+  const sign_bit = bits.slice(0, 1);
+  const exponent_bits = bits.slice(1, 12);
+  const mantissa_bits = bits.slice(12, 64);
+  const exp = parseInt(exponent_bits, 2);
+  const m = parseInt(mantissa_bits, 2);
   sign = sign_bit === '0' ? '+1' : '-1';
-  exponent = "".concat(exp - 1023).concat(exp === 0 ? ' (denormalized)' : '');
-  mantissa = "".concat((0, logic_1.addZeroes)((exp === 0 ? 0 : 1) + m / Math.pow(2, 52))).concat(exp === 0 ? ' (denormalized)' : '');
+  exponent = `${exp - 1023}${exp === 0 ? ' (denormalized)' : ''}`;
+  mantissa = `${(0, logic_1.addZeroes)((exp === 0 ? 0 : 1) + m / 2 ** 52)}${exp === 0 ? ' (denormalized)' : ''}`;
   enc_sign = sign_bit;
   enc_exponent = exp.toString();
   enc_mantissa = parseInt(mantissa_bits, 2).toString();
-  var num = BigInt('0b' + bits) & 0xffffffffffffffffn;
-  var float = (0, logic_1.binToFloat)(bits);
+  const num = BigInt('0b' + bits) & 0xffffffffffffffffn;
+  const float = (0, logic_1.binToFloat)(bits);
   decimal = (0, logic_1.addZeroes)(float);
   actual = actualFrom(float);
   binary = num.toString(2).padStart(64, '0');
   hex = '0x' + num.toString(16);
-  $bits.forEach(function (bit, i) {
+  $bits.forEach((bit, i) => {
     bit.checked = bits[i] === '1' ? true : false;
     flipBit(bit);
   });
@@ -500,38 +460,36 @@ var updateInputs = function updateInputs(inputs) {
   $enc_mantissa.textContent = enc_mantissa;
 };
 
-$bits.forEach(function (bit) {
-  bit.addEventListener('click', function () {
+$bits.forEach(bit => {
+  bit.addEventListener('click', () => {
     flipBit(bit);
     updateInputs();
   });
 });
-$decimal === null || $decimal === void 0 ? void 0 : $decimal.addEventListener('keypress', function (e) {
+$decimal?.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
-    var _parseFloat;
-
-    var float = (_parseFloat = parseFloat(e.target.value)) !== null && _parseFloat !== void 0 ? _parseFloat : 0.0;
+    const float = parseFloat(e.target.value) ?? 0.0;
     updateInputs((0, logic_1.numTo64BitBinary)((0, logic_1.floatToNum)(float)));
   }
 });
-(_document$querySelect = document.querySelector('#plus')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener('click', function () {
-  var current_number = BigInt(hex);
-  var new_number = current_number + 1n & 0xffffffffffffffffn;
+document.querySelector('#plus')?.addEventListener('click', () => {
+  const current_number = BigInt(hex);
+  const new_number = current_number + 1n & 0xffffffffffffffffn;
   updateInputs((0, logic_1.numTo64BitBinary)(new_number));
 });
-(_document$querySelect2 = document.querySelector('#minus')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.addEventListener('click', function () {
-  var current_number = BigInt(hex);
-  var new_number = current_number === 0n ? 0xffffffffffffffffn : current_number - 1n;
+document.querySelector('#minus')?.addEventListener('click', () => {
+  const current_number = BigInt(hex);
+  const new_number = current_number === 0n ? 0xffffffffffffffffn : current_number - 1n;
   updateInputs((0, logic_1.numTo64BitBinary)(new_number));
 });
-(_document$querySelect3 = document.querySelector('#lshift')) === null || _document$querySelect3 === void 0 ? void 0 : _document$querySelect3.addEventListener('click', function () {
-  var current_number = BigInt(hex);
-  var new_number = current_number << 1n & 0xffffffffffffffffn;
+document.querySelector('#lshift')?.addEventListener('click', () => {
+  const current_number = BigInt(hex);
+  const new_number = current_number << 1n & 0xffffffffffffffffn;
   updateInputs((0, logic_1.numTo64BitBinary)(new_number));
 });
-(_document$querySelect4 = document.querySelector('#rshift')) === null || _document$querySelect4 === void 0 ? void 0 : _document$querySelect4.addEventListener('click', function () {
-  var current_number = BigInt(hex);
-  var new_number = current_number >> 1n;
+document.querySelector('#rshift')?.addEventListener('click', () => {
+  const current_number = BigInt(hex);
+  const new_number = current_number >> 1n;
   updateInputs((0, logic_1.numTo64BitBinary)(new_number));
 });
 },{"./logic":"logic.ts","./serviceWorker":"serviceWorker.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -562,7 +520,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54141" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55542" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
