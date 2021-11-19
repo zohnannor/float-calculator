@@ -47,7 +47,8 @@ const actualFrom = (f: number): string => {
   let [n, d] = asIntegerRatio(f);
 
   let exp = d.toString(2).length - 1;
-  const int = eval('(n * 5n ** BigInt(exp)).toString()'); // parcel hack https://github.com/parcel-bundler/parcel/issues/7310
+  // const int = eval('(n * 5n ** BigInt(exp)).toString()'); // parcel hack https://github.com/parcel-bundler/parcel/issues/7310
+  const int = (n * 5n ** BigInt(exp)).toString();
   exp = -exp;
 
   const leftdigits = exp + int.length;
